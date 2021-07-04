@@ -1,4 +1,8 @@
-
+#Basic code : Masoud Harati
+# by Innan Nouhaila
+#04/07/2021
+#INIT 2022 Challenge : Make To-Do application
+#MLH
 import tkinter
 import tkinter.messagebox
 import pickle
