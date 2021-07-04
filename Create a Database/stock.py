@@ -1,4 +1,4 @@
-
+#basic code from tourist20
 #Stock Gestion
 from tkinter import *
 from tkinter import ttk
