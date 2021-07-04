@@ -1,4 +1,4 @@
-#By Nouhaila INNAN 
+
 #Stock Gestion
 from tkinter import *
 from tkinter import ttk
@@ -14,7 +14,6 @@ class Student:
         title = Label(self.root, text="Gestion de Stock", bd=10, relief=GROOVE, font=("times new roman", 40, "bold"), bg="black", fg="green")
         title.pack(side=TOP, fill=X)
 
-        #require data variables
         self.roll_var = StringVar()
         self.name_var = StringVar()
         self.email_var = StringVar()
@@ -53,10 +52,6 @@ class Student:
         lbl_gender.grid(row=5, column=0, padx=20, pady=10, sticky="w")
         txt_gender = Entry(Manage_Frame, textvariable=self.gender_var, font=("times new roman", 18, "bold"), bd=5, relief=GROOVE)
         txt_gender.grid(row=5, column=1, padx=20, pady=10, sticky="w")
-        #lbl_gender.grid(row=4, column=0, padx=20, pady=10, sticky="w")
-        #combo_gender = ttk.Combobox(Manage_Frame, textvariable=self.gender_var, font=("times new roman", 13, "bold"), state="readonly" )
-        #combo_gender['values'] = ("male", "female", "other")
-        #combo_gender.grid(row=4, column=1, padx=20, pady=10, sticky="w")
         
         lbl_contact = Label(Manage_Frame, text="Etat de stock",  bg="green", fg="white", font=("times new roman", 18, "bold"))
         lbl_contact.grid(row=5, column=0, padx=20, pady=10, sticky="w")
@@ -74,7 +69,6 @@ class Student:
         self.txt_Address =Text(Manage_Frame, width=30, height=4, font=("", 10))
         self.txt_Address.grid(row=7, column=1, padx=20, pady=10, sticky="w")
         
-        #button frame
         Button_Frame = Frame(Manage_Frame, bd=4, relief=RIDGE, bg="green")
         Button_Frame.place(x=10, y=510, width=430)
 
@@ -84,7 +78,6 @@ class Student:
         clearbtn = Button(Button_Frame, text="Clear", width=8, command=self.clear).grid(row=0, column=3, padx=5, pady=5)
         
 
-        #==============Detail Frame========================
         Detail_Frame = Frame(self.root, bd=4, relief=RIDGE, bg="green")
         Detail_Frame.place(x=500, y=100, width=750, height=580)
 
@@ -119,9 +112,8 @@ class Student:
         self.Student_table.heading("Emplacement", text="Contact")
         self.Student_table.heading("dob", text="Désignation")
         self.Student_table.heading("address", text="Etat de stock")
-        self.Student_table['show']='headings' # removing extra index col at begining
+        self.Student_table['show']='headings' 
 
-        #setting up widths of cols
         self.Student_table.column("roll", width=100)
         self.Student_table.column("name", width=100)
         self.Student_table.column("email", width=100)
@@ -129,10 +121,10 @@ class Student:
         self.Student_table.column("contact", width=100)
         self.Student_table.column("dob", width=100)
         self.Student_table.column("address", width=100)
-        self.Student_table.pack(fill=BOTH, expand=1) #fill both is used to fill cols around the frame
-        self.Student_table.bind("<ButtonRelease-1>", self.get_cursor)# this is an event to select row 
+        self.Student_table.pack(fill=BOTH, expand=1) 
+        self.Student_table.bind("<ButtonRelease-1>", self.get_cursor)
         
-        self.fetch_data() #to display data in grid
+        self.fetch_data() 
 
     def add_student(self):
 
@@ -147,7 +139,7 @@ class Student:
 
 
             con.commit()
-            self.fetch_data() # this is for if we add any new student then it will call and update the pool
+            self.fetch_data() 
             self.clear()
             con.close()
             messagebox.showinfo("Successfull", "Record has been inserted.")
@@ -200,7 +192,6 @@ class Student:
 
 
             con.commit()
-            self.fetch_data() # this is for if we add any new student then it will call and update the pool
             self.clear()
             con.close()
             messagebox.showinfo("successfull", "Record has been updated.")
@@ -221,8 +212,7 @@ class Student:
 
         con = pymysql.connect(host="localhost", user="root", password="123", database="stud")
         cur = con.cursor()
-
-       
+  
 
         sql = "SELECT * FROM students WHERE roll_no = %s"
         adr = self.search_txt.get()
@@ -231,10 +221,6 @@ class Student:
         if(not val):
             messagebox.showinfo("No", "Not availabe!")
 
-
-
-       # cur.execute("SELECT * FROM students WHERE"+str(params)+"LIKE %s ", ("%"+str(params2)+"%",))
-       # cur.execute("SELECT * from students WHERE"+str(self.search_by.get())+"LIKE '%"+str(self.search_txt.get())+"%'")
         rows = cur.fetchall()
         if(len(rows)!=0):
             self.Student_table.delete(*self.Student_table.get_children())
